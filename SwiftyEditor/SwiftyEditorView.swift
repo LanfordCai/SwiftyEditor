@@ -25,6 +25,17 @@ class SwiftyEditorView: UIView {
         }
     }
     
+    private var editingEnableVar = true
+    var editingEnabled: Bool {
+        get {
+            return isContentEditable()
+        
+        }
+        set { setContentEditable(newValue) }
+    }
+    
+    private(set) var placeholder: String = ""
+    
     private var editorLoaded = false
     
     
@@ -43,6 +54,18 @@ class SwiftyEditorView: UIView {
     
     // MARK: Public Methods
     
+    func focus() {
+        webView.evaluateJavaScript("RE.focus();") { (result, error) in
+            print("focus result \(result)")
+        }
+    }
+    
+    func bold() {
+        webView.evaluateJavaScript("RE.setBold();") { (result, error) in
+            print("bold result \(result)")
+        }
+    }
+    
     func setHTML(html: String) {
         contentHTML = html
         if editorLoaded {
@@ -51,6 +74,34 @@ class SwiftyEditorView: UIView {
                 print("setHTML \(result)")
             })
             updateHeight()
+        }
+    }
+    
+    func getHTML(completion: (HTMLString: String?) -> Void) {
+        webView.evaluateJavaScript("RE.getHtml();") { (result, error) in
+            guard let HTMLString = result as? String else {
+                completion(HTMLString: nil)
+                return
+            }
+            completion(HTMLString: HTMLString)
+        }
+    }
+    
+    func getText(completion: (text: String?) -> Void) {
+        webView.evaluateJavaScript("RE.getText();") { (result, error) in
+            guard let text = result as? String else {
+                completion(text: nil)
+                return
+            }
+            completion(text: text)
+        }
+    }
+    
+    func setPlaceholderText(text: String) {
+        placeholder = text
+        let script = "RE.setPlaceholderText('\(escape(text))');"
+        webView.evaluateJavaScript(script) { (result, error) in
+            print("setPlaceholderText result \(result)")
         }
     }
     
@@ -79,12 +130,38 @@ class SwiftyEditorView: UIView {
         }
     }
     
+    private func isContentEditable() -> Bool {
+        if editorLoaded {
+            
+        } else {
+            
+        }
+        // MARK:
+        return true
+    }
+    
+    private func setContentEditable(editable: Bool) {
+        if editorLoaded {
+            let value = editable ? "true" : "false"
+            let script = "RE.editor.contentEditable = \(value);"
+            webView.evaluateJavaScript(script, completionHandler: { (result, error) in
+                print("setContentEditable \(result)")
+            })
+        } else {
+            editingEnableVar = editable
+        }
+    }
+    
+
+    
     private func performCommand(method: String) {
         if method.hasPrefix("ready") {
             if !editorLoaded {
                 editorLoaded = true
                 setHTML(contentHTML)
-                
+                setContentEditable(editingEnableVar)
+                setPlaceholderText(placeholder)
+                //
             }
             updateHeight()
             
