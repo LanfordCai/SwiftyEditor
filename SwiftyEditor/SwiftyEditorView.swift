@@ -11,6 +11,12 @@ import WebKit
 
 class SwiftyEditorView: UIView {
     
+    var scrollEnabled: Bool = true {
+        didSet {
+            webView.scrollView.scrollEnabled = scrollEnabled
+        }
+    }
+    
     lazy private var webView: WKWebView = {
         let webView = WKWebView()
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -54,18 +60,6 @@ class SwiftyEditorView: UIView {
     
     // MARK: Public Methods
     
-    func focus() {
-        webView.evaluateJavaScript("RE.focus();") { (result, error) in
-            print("focus result \(result)")
-        }
-    }
-    
-    func bold() {
-        webView.evaluateJavaScript("RE.setBold();") { (result, error) in
-            print("bold result \(result)")
-        }
-    }
-    
     func setHTML(html: String) {
         contentHTML = html
         if editorLoaded {
@@ -102,6 +96,160 @@ class SwiftyEditorView: UIView {
         let script = "RE.setPlaceholderText('\(escape(text))');"
         webView.evaluateJavaScript(script) { (result, error) in
             print("setPlaceholderText result \(result)")
+        }
+    }
+    
+    func removeFormat() {
+        webView.evaluateJavaScript("RE.removeFormat") { (result, error) in
+            print("removeFormat \(result)")
+        }
+    }
+    
+    func setFontSize(size: Int) {
+        let script = "RE.setFontSize('\(size))px');"
+        webView.evaluateJavaScript(script) { (result, error) in
+            print("setFontSize \(result)")
+        }
+    }
+    
+    func setEditorBackgroundColor(color: UIColor) {
+        let hex = colorToHex(color)
+        let script = "RE.setBackgroundColor('\(hex)');"
+        webView.evaluateJavaScript(script) { (result, error) in
+            print("setEditorBackgroundColor \(result)")
+        }
+    }
+    
+    func undo() {
+        webView.evaluateJavaScript("RE.undo();") { (result, error) in
+            print("Undo \(result)")
+        }
+    }
+    
+    func redo() {
+        webView.evaluateJavaScript("RE.redo();") { (result, error) in
+            print("Redo \(result)")
+        }
+    }
+    
+    func bold() {
+        webView.evaluateJavaScript("RE.setBold();") { (result, error) in
+            print("bold result \(result)")
+        }
+    }
+    
+    func italic() {
+        webView.evaluateJavaScript("RE.setItalic();") { (result, error) in
+            print("italic result \(result)")
+        }
+    }
+    
+    func subscriptText() {
+        webView.evaluateJavaScript("RE.setSubscript();") { (result, error) in
+            print("SubscriptText \(result)")
+        }
+    }
+    
+    func superscriptText() {
+        webView.evaluateJavaScript("RE.setSuperscript();") { (result, error) in
+            print("SuperscriptText \(result)")
+        }
+    }
+    
+    func strikeThrough() {
+        webView.evaluateJavaScript("RE.setStrikeThrough();") { (result, error) in
+            print("StrikeThrough \(result)")
+        }
+    }
+    
+    func underline() {
+        webView.evaluateJavaScript("RE.setUnderline();") { (result, error) in
+            print("Underline \(result)")
+        }
+    }
+    
+    func insertImage(url: String, alt: String) {
+        webView.evaluateJavaScript("RE.prepareInsert();") { (result, error) in
+            if error == nil {
+                let script = "RE.insertImage('\(self.escape(url))', '\(self.escape(alt))');"
+                self.webView.evaluateJavaScript(script) { (result, error) in
+                    print("InsertImage \(result)")
+                }
+            }
+        }
+    }
+    
+    func insertLink(href: String, title: String) {
+        webView.evaluateJavaScript("RE.prepareInsert();") { (result, error) in
+            if error == nil {
+                let script = "RE.insertLink('\(self.escape(href))', '\(self.escape(title))');"
+                self.webView.evaluateJavaScript(script) { (result, error) in
+                    print("InsertImage \(result)")
+                }
+            }
+        }
+    }
+    
+    func focus() {
+        webView.evaluateJavaScript("RE.focus();") { (result, error) in
+            print("Focus result \(result)")
+        }
+    }
+    
+    func blur() {
+        webView.evaluateJavaScript("RE.blurFocus();") { (result, error) in
+            print("Blur \(result)")
+        }
+    }
+    
+    func rangeSelectionExists(completion: (exist: Bool) -> Void) {
+        webView.evaluateJavaScript("RE.rangeSelectionExists();") { (result, error) in
+            guard let result = result as? String else {
+                completion(exist: false)
+                return
+            }
+            
+            if result == "true" {
+                completion(exist: true)
+            } else {
+                completion(exist: false)
+            }
+        }
+    }
+    
+    func rangeOfCaretSelectionExists(completion: (exist: Bool) -> Void) {
+        webView.evaluateJavaScript("RE.rangeOrCaretSelectionExists();") { (result, error) in
+            guard let result = result as? String else {
+                completion(exist: false)
+                return
+            }
+            
+            if result == "true" {
+                completion(exist: true)
+            } else {
+                completion(exist: false)
+            }
+        }
+    }
+    
+    func getSelectedHref(completion: String? -> Void) {
+        rangeSelectionExists { [weak self] (exist) in
+            if !exist {
+                completion(nil)
+                return
+            }
+            self?.webView.evaluateJavaScript("RE.getSelectedHref();", completionHandler: { (result, error) in
+                guard let href = result as? String else {
+                    completion(nil)
+                    return
+                }
+                
+                if href == "" {
+                    completion(nil)
+                } else {
+                    completion(href)
+                }
+            })
         }
     }
     
@@ -152,8 +300,6 @@ class SwiftyEditorView: UIView {
         }
     }
     
-
-    
     private func performCommand(method: String) {
         if method.hasPrefix("ready") {
             if !editorLoaded {
@@ -176,6 +322,9 @@ class SwiftyEditorView: UIView {
         }
     }
     
+    
+    // MARK: Helpers
+    
     private func escape(string: String) -> String {
         let unicode = string.unicodeScalars
         var newString = ""
@@ -190,6 +339,20 @@ class SwiftyEditorView: UIView {
             }
         }
         return newString
+    }
+    
+    private func colorToHex(color: UIColor) -> String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: nil)
+        
+        let r = Int(255.0 * red)
+        let g = Int(255.0 * green)
+        let b = Int(255.0 * blue)
+        
+        let str = NSString(format: "#%02x%02x%02x", r, g, b)
+        return str as String
     }
 }
 
