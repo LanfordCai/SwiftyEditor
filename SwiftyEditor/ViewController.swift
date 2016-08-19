@@ -8,18 +8,23 @@
 
 import UIKit
 
+private let ScreenWidth = UIScreen.mainScreen().bounds.width
+private let ScreenHeight = UIScreen.mainScreen().bounds.height
+
 class ViewController: UIViewController {
+    
+    private var editor = SwiftyEditorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        editor.frame = CGRect(x: 0, y: 24, width: ScreenWidth, height: ScreenHeight - 24)
+        view.addSubview(editor)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

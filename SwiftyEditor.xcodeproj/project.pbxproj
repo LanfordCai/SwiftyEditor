@@ -14,6 +14,10 @@
 		BFE30A231D66E6B50098D6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE30A211D66E6B50098D6A2 /* LaunchScreen.storyboard */; };
 		BFE30A2E1D66E6B60098D6A2 /* SwiftyEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30A2D1D66E6B60098D6A2 /* SwiftyEditorTests.swift */; };
 		BFE30A391D66E6B60098D6A2 /* SwiftyEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30A381D66E6B60098D6A2 /* SwiftyEditorUITests.swift */; };
+		BFE30A471D66E7AD0098D6A2 /* SwiftyEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30A461D66E7AD0098D6A2 /* SwiftyEditorView.swift */; };
+		BFE30A4C1D66E99D0098D6A2 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = BFE30A491D66E99D0098D6A2 /* style.css */; };
+		BFE30A4D1D66E99D0098D6A2 /* swifty_editor.js in Resources */ = {isa = PBXBuildFile; fileRef = BFE30A4A1D66E99D0098D6A2 /* swifty_editor.js */; };
+		BFE30A4E1D66E99D0098D6A2 /* swifty_editor.html in Resources */ = {isa = PBXBuildFile; fileRef = BFE30A4B1D66E99D0098D6A2 /* swifty_editor.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		BFE30A341D66E6B60098D6A2 /* SwiftyEditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyEditorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE30A381D66E6B60098D6A2 /* SwiftyEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyEditorUITests.swift; sourceTree = "<group>"; };
 		BFE30A3A1D66E6B60098D6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFE30A461D66E7AD0098D6A2 /* SwiftyEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyEditorView.swift; sourceTree = "<group>"; };
+		BFE30A491D66E99D0098D6A2 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		BFE30A4A1D66E99D0098D6A2 /* swifty_editor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = swifty_editor.js; sourceTree = "<group>"; };
+		BFE30A4B1D66E99D0098D6A2 /* swifty_editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = swifty_editor.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,8 @@
 		BFE30A171D66E6B50098D6A2 /* SwiftyEditor */ = {
 			isa = PBXGroup;
 			children = (
+				BFE30A481D66E7D30098D6A2 /* Resources */,
+				BFE30A461D66E7AD0098D6A2 /* SwiftyEditorView.swift */,
 				BFE30A181D66E6B50098D6A2 /* AppDelegate.swift */,
 				BFE30A1A1D66E6B50098D6A2 /* ViewController.swift */,
 				BFE30A1C1D66E6B50098D6A2 /* Main.storyboard */,
@@ -123,6 +133,16 @@
 				BFE30A3A1D66E6B60098D6A2 /* Info.plist */,
 			);
 			path = SwiftyEditorUITests;
+			sourceTree = "<group>";
+		};
+		BFE30A481D66E7D30098D6A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFE30A491D66E99D0098D6A2 /* style.css */,
+				BFE30A4A1D66E99D0098D6A2 /* swifty_editor.js */,
+				BFE30A4B1D66E99D0098D6A2 /* swifty_editor.html */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFE30A231D66E6B50098D6A2 /* LaunchScreen.storyboard in Resources */,
+				BFE30A4E1D66E99D0098D6A2 /* swifty_editor.html in Resources */,
+				BFE30A4C1D66E99D0098D6A2 /* style.css in Resources */,
+				BFE30A4D1D66E99D0098D6A2 /* swifty_editor.js in Resources */,
 				BFE30A201D66E6B50098D6A2 /* Assets.xcassets in Resources */,
 				BFE30A1E1D66E6B50098D6A2 /* Main.storyboard in Resources */,
 			);
@@ -258,6 +281,7 @@
 			files = (
 				BFE30A1B1D66E6B50098D6A2 /* ViewController.swift in Sources */,
 				BFE30A191D66E6B50098D6A2 /* AppDelegate.swift in Sources */,
+				BFE30A471D66E7AD0098D6A2 /* SwiftyEditorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +508,7 @@
 				BFE30A3F1D66E6B60098D6A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFE30A401D66E6B60098D6A2 /* Build configuration list for PBXNativeTarget "SwiftyEditorTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +517,7 @@
 				BFE30A421D66E6B60098D6A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFE30A431D66E6B60098D6A2 /* Build configuration list for PBXNativeTarget "SwiftyEditorUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +526,7 @@
 				BFE30A451D66E6B60098D6A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
