@@ -28,6 +28,7 @@ class SwiftyEditorView: UIView {
     private(set) var contentHTML: String = "" {
         didSet {
             print("contentHTML didSet")
+            print(contentHTML)
         }
     }
     
@@ -312,12 +313,23 @@ class SwiftyEditorView: UIView {
             updateHeight()
             
         } else if method.hasPrefix("input") {
-            
+            webView.evaluateJavaScript("RE.getHtml()", completionHandler: { (result, error) in
+                if let content = result as? String {
+                    self.contentHTML = content
+                    self.updateHeight()
+                }
+            })
         } else if method.hasPrefix("focus") {
             
         } else if method.hasPrefix("blur") {
             
         } else if method.hasPrefix("action/") {
+            webView.evaluateJavaScript("RE.getHtml", completionHandler: { (result, error) in
+                if let content = result as? String {
+                    self.contentHTML = content
+                    // TODO:
+                }
+            })
             
         }
     }

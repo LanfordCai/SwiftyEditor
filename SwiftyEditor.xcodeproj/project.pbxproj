@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFC7C17C1D6ACCBB00F9790C /* SwiftyEditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7C17B1D6ACCBB00F9790C /* SwiftyEditorToolbar.swift */; };
+		BFC7C17E1D6ACE1D00F9790C /* SwiftyEditorOptionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7C17D1D6ACE1D00F9790C /* SwiftyEditorOptionItem.swift */; };
+		BFC7C1801D6ACFFD00F9790C /* UIView+Responder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7C17F1D6ACFFD00F9790C /* UIView+Responder.swift */; };
 		BFE30A191D66E6B50098D6A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30A181D66E6B50098D6A2 /* AppDelegate.swift */; };
 		BFE30A1B1D66E6B50098D6A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE30A1A1D66E6B50098D6A2 /* ViewController.swift */; };
 		BFE30A1E1D66E6B50098D6A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE30A1C1D66E6B50098D6A2 /* Main.storyboard */; };
@@ -38,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BFC7C17B1D6ACCBB00F9790C /* SwiftyEditorToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyEditorToolbar.swift; sourceTree = "<group>"; };
+		BFC7C17D1D6ACE1D00F9790C /* SwiftyEditorOptionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyEditorOptionItem.swift; sourceTree = "<group>"; };
+		BFC7C17F1D6ACFFD00F9790C /* UIView+Responder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Responder.swift"; sourceTree = "<group>"; };
 		BFE30A151D66E6B50098D6A2 /* SwiftyEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE30A181D66E6B50098D6A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFE30A1A1D66E6B50098D6A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 			children = (
 				BFE30A481D66E7D30098D6A2 /* Resources */,
 				BFE30A461D66E7AD0098D6A2 /* SwiftyEditorView.swift */,
+				BFC7C17D1D6ACE1D00F9790C /* SwiftyEditorOptionItem.swift */,
+				BFC7C17B1D6ACCBB00F9790C /* SwiftyEditorToolbar.swift */,
+				BFC7C17F1D6ACFFD00F9790C /* UIView+Responder.swift */,
 				BFE30A181D66E6B50098D6A2 /* AppDelegate.swift */,
 				BFE30A1A1D66E6B50098D6A2 /* ViewController.swift */,
 				BFE30A1C1D66E6B50098D6A2 /* Main.storyboard */,
@@ -279,9 +288,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC7C17C1D6ACCBB00F9790C /* SwiftyEditorToolbar.swift in Sources */,
 				BFE30A1B1D66E6B50098D6A2 /* ViewController.swift in Sources */,
 				BFE30A191D66E6B50098D6A2 /* AppDelegate.swift in Sources */,
+				BFC7C1801D6ACFFD00F9790C /* UIView+Responder.swift in Sources */,
 				BFE30A471D66E7AD0098D6A2 /* SwiftyEditorView.swift in Sources */,
+				BFC7C17E1D6ACE1D00F9790C /* SwiftyEditorOptionItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

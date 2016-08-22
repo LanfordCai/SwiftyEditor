@@ -14,18 +14,31 @@ private let ScreenHeight = UIScreen.mainScreen().bounds.height
 class ViewController: UIViewController {
     
     private var editor = SwiftyEditorView()
+    
+    lazy var toolbar: SwiftyEditorToolbar = {
+        let toolbar = SwiftyEditorToolbar(frame: CGRect(x: 0, y: ScreenHeight - 44, width: ScreenWidth, height: 44))
+        toolbar.options = SwiftyEditorOptions.all()
+        return toolbar
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .lightGrayColor()
         editor.frame = CGRect(x: 0, y: 24, width: ScreenWidth, height: ScreenHeight - 64)
         view.addSubview(editor)
         
-        let button = UIButton(frame: CGRect(x: 0, y: ScreenHeight - 64, width: 100, height: 64))
-        button.setTitle("Bold", forState: .Normal)
-        button.setTitleColor(.blueColor(), forState: .Normal)
-        button.addTarget(self, action: #selector(boldButtonTapped), forControlEvents: .TouchUpInside)
-        view.addSubview(button)
+        toolbar.editor = editor
+        toolbar.delegate = self
+        view.addSubview(toolbar)
+        
+        let item = SwiftyEditorOptionItem(image: nil, title: "Clear") { toolbar in
+            toolbar?.editor?.setHTML("")
+        }
+        
+        var options = toolbar.options
+        options.append(item)
+        toolbar.options = options
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,6 +48,13 @@ class ViewController: UIViewController {
     
     @objc private func boldButtonTapped() {
         editor.bold()
+    }
+}
+
+extension ViewController: SwiftyEditorToolbarDelegate {
+    
+    func swiftyEditorToolbarInsertImage(toolbar: SwiftyEditorToolbar) {
+        toolbar.editor?.insertImage("http://ww4.sinaimg.cn/mw690/68c9c44djw1f72dobe6yzj20qo1bedm0.jpg", alt: "Gravatar")
     }
 }
 
