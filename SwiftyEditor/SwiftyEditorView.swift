@@ -67,8 +67,10 @@ class SwiftyEditorView: UIView {
             let script = "RE.setHtml('\(escape(html))');"
             webView.evaluateJavaScript(script, completionHandler: { (result, error) in
                 print("setHTML \(result)")
+                if error == nil {
+                    self.updateHeight()
+                }
             })
-            updateHeight()
         }
     }
     
@@ -403,6 +405,8 @@ extension SwiftyEditorView: WKNavigationDelegate {
                     }
                 }
             })
+            decisionHandler(.Cancel)
+            return
             
             // TODO: run js code
         }

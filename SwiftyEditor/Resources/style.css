@@ -52,3 +52,8 @@ body, h1, p {
 	line-height:28px;
 	font-size: 12pt;
 }
+
+img {
+    width: 100%;
+    height: auto;
+}
